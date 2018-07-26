@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {push} from 'connected-react-router';
-import {addContacts} from './action';
+import {storeContacts, removeContact} from './action';
 import defaultContacts from '../utils/contacts.json';
 
 import Table from '@material-ui/core/Table';
@@ -21,7 +21,7 @@ class Contacts extends Component {
   componentDidMount() {
     const {contactList, actions} = this.props;
     if (contactList.length === 0) {
-      this.props.actions.addContacts(defaultContacts);
+      this.props.actions.storeContacts(defaultContacts);
     }
   }
 
@@ -41,13 +41,14 @@ class Contacts extends Component {
                   <TableCell>Email</TableCell>
                   <TableCell>Phone</TableCell>
                   <TableCell>Address</TableCell>
+                  <TableCell>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {
                   contactList.map((contact, i) => {
                     return (
-                      <ContactListItem key={contact.id} contact={contact} />
+                      <ContactListItem key={contact.id} contact={contact} removeContact={this.props.actions.removeContact} contactIndex={i} />
                     );
                   })
                 }
@@ -71,7 +72,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({push, addContacts}, dispatch)
+    actions: bindActionCreators({push, storeContacts, removeContact}, dispatch)
   };
 }
 
