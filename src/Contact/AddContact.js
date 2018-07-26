@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {storeContact} from './action';
+import {isEmpty, isNil} from 'ramda';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -11,6 +12,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import ErrorIcon from '@material-ui/icons/Error';
 
 import styled from 'styled-components';
 
@@ -50,7 +55,8 @@ const initialContactState = {
 class AddContact extends Component {
   state = {
     ...initialContactState,
-    openDialog: false
+    openDialog: false,
+    showSnackbar: false
   }
 
   componentDidMount() {
@@ -61,7 +67,22 @@ class AddContact extends Component {
 
   onChange = e => this.setState({[e.target.id]: e.target.value});
 
+  ghettoValidation = () => {
+    // basic validation testing to verify that all the inputs have a value (except the picture).
+    const {firstName, lastName, email, street, city, state, zip, phone, picture} = this.state;
+    const contact = {firstName, lastName, email, street, city, state, zip, phone};
+    const isValid = Object.keys(contact).every(key => contact[key] && contact[key].length > 0);
+    return isValid;
+  }
+
   addContact = () => {
+    const isValid = this.ghettoValidation();
+    if (isValid === false) {
+      // form is not valid so throw a message to the user.
+      this.setState({showSnackbar: true});
+      return;
+    }
+
     const {firstName, lastName, email, street, city, state, zip, phone, picture} = this.state;
     const contact = {
       name: {
@@ -83,8 +104,13 @@ class AddContact extends Component {
     this.setOpenDialog(false);
   }
 
+  cancelAddContact = () => {
+    this.setOpenDialog(false);
+    this.setState({...initialContactState})
+  }
+
   render() {
-    const {openDialog} = this.state;
+    const {openDialog, showSnackbar} = this.state;
 
     return (
       <div>
@@ -108,12 +134,12 @@ class AddContact extends Component {
                 autoFocus
                 margin="dense"
                 id="firstName"
-                label="First Name"
+                label="First Name *"
                 onChange={this.onChange} />
               <TextField
                 margin="dense"
                 id="lastName"
-                label="Last Name"
+                label="Last Name *"
                 onChange={this.onChange} />
             </InputContainer>
             <Section>
@@ -122,39 +148,39 @@ class AddContact extends Component {
                 <TextField
                   margin="dense"
                   id="street"
-                  label="Street"
+                  label="Street *"
                   onChange={this.onChange} />
                 </InputContainer>
                 <InputContainer>
                   <TextField
                     margin="dense"
                     id="city"
-                    label="City"
+                    label="City *"
                     onChange={this.onChange} />
                   <TextField
                     margin="dense"
                     id="state"
-                    label="State"
+                    label="State *"
                     onChange={this.onChange} />
                   <TextField
                     margin="dense"
-                    id="Zip"
-                    label="Zip"
+                    id="zip"
+                    label="Zip *"
                     onChange={this.onChange} />
               </InputContainer>
             </Section>
             <Section>
               <TextField
                 margin="dense"
-                id="name"
-                label="Email Address"
+                id="email"
+                label="Email Address *"
                 type="email"
                 fullWidth
                 onChange={this.onChange} />
               <TextField
                 margin="dense"
                 id="phone"
-                label="Phone number"
+                label="Phone number *"
                 type="tel"
                 fullWidth
                 onChange={this.onChange} />
@@ -169,7 +195,7 @@ class AddContact extends Component {
             </Section>
           </DialogContent>
           <DialogActions>
-            <Button onClick={e => this.setOpenDialog(false)} color="primary">
+            <Button onClick={this.cancelAddContact} color="primary">
               Cancel
             </Button>
             <Button onClick={this.addContact} color="primary">
@@ -177,6 +203,29 @@ class AddContact extends Component {
             </Button>
           </DialogActions>
         </Dialog>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={showSnackbar}
+          autoHideDuration={66666000}
+          onClose={e => this.setState({showSnackbar: false})}
+          message={
+            <div style={{display:'flex', alignItems: 'center'}}>
+              <ErrorIcon style={{marginRight:10}} />
+              <div>Make sure every field marked with an asterisk (*) has a value.</div>
+            </div>
+          }
+          action={[
+            <IconButton
+              key="close"
+              color="inherit"
+              onClick={e => this.setState({showSnackbar: false})}>
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
       </div>
     );
   }
