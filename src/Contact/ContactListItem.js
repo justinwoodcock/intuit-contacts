@@ -6,11 +6,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 class ContactListItem extends Component {
 
   render() {
-    const {contact, removeContact, contactIndex} = this.props;
+    const {contact, removeContact, contactIndex, setContactToEdit} = this.props;
     const {street, city, state, zip} = contact.location;
 
     const fullName = `${contact.name.first} ${contact.name.last}`;
@@ -33,6 +34,9 @@ class ContactListItem extends Component {
         <TableCell>
         <IconButton onClick={e => removeContact(contactIndex)}>
           <DeleteIcon />
+        </IconButton>
+        <IconButton onClick={e => setContactToEdit(contactIndex)}>
+          <EditIcon />
         </IconButton>
         </TableCell>
       </TableRow>

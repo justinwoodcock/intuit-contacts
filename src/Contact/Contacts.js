@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {push} from 'connected-react-router';
-import {storeContacts, removeContact} from './action';
+import {storeContacts, removeContact, setContactToEdit} from './action';
 import defaultContacts from '../utils/contacts.json';
 
 import Table from '@material-ui/core/Table';
@@ -15,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import Header from '../Header';
 import AddContact from './AddContact';
 import ContactListItem from './ContactListItem';
+import EditContact from './EditContact';
 
 class Contacts extends Component {
 
@@ -23,6 +24,10 @@ class Contacts extends Component {
     if (contactList.length === 0) {
       this.props.actions.storeContacts(defaultContacts);
     }
+  }
+
+  editContact = (index) => {
+    this.props.actions.setContactToEdit(index);
   }
 
   render() {
@@ -48,7 +53,12 @@ class Contacts extends Component {
                 {
                   contactList.map((contact, i) => {
                     return (
-                      <ContactListItem key={contact.id} contact={contact} removeContact={this.props.actions.removeContact} contactIndex={i} />
+                      <ContactListItem
+                        key={contact.id}
+                        contact={contact}
+                        removeContact={this.props.actions.removeContact}
+                        setContactToEdit={this.editContact}
+                        contactIndex={i} />
                     );
                   })
                 }
@@ -57,6 +67,7 @@ class Contacts extends Component {
           </Paper>
         </div>
         <AddContact />
+        <EditContact />
       </div>
     );
   }
@@ -72,7 +83,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({push, storeContacts, removeContact}, dispatch)
+    actions: bindActionCreators({push, storeContacts, removeContact,
+      setContactToEdit}, dispatch)
   };
 }
 

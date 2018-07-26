@@ -1,9 +1,10 @@
 import { createReducer } from 'redux-act';
 
-import {storeContacts, storeContact} from './action';
+import {storeContacts, storeContact, setContactToEdit} from './action';
 
 const initialState = {
-  contactList: []
+  contactList: [],
+  contactToEdit: null
 };
 
 const ContactReducer = createReducer({
@@ -17,6 +18,10 @@ const ContactReducer = createReducer({
       ...state.contactList,
       contact
     ]
+  }),
+  [setContactToEdit]: (state, contactToEdit) => ({
+    ...state,
+    contactToEdit
   })
 }, initialState);
 
