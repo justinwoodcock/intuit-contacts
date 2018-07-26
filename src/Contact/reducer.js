@@ -1,15 +1,22 @@
 import { createReducer } from 'redux-act';
 
-import {addContacts} from './action';
+import {addContacts, storeContact} from './action';
 
 const initialState = {
-  contacts: []
+  contactList: []
 };
 
 const ContactReducer = createReducer({
-  [addContacts]: (state, contacts) => ({
+  [addContacts]: (state, contactList) => ({
     ...state,
-    contacts
+    contactList
+  }),
+  [storeContact]: (state, contact) => ({
+    ...state,
+    contactList: [
+      ...state.contactList,
+      contact
+    ]
   })
 }, initialState);
 

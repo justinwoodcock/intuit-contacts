@@ -1,13 +1,78 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {push} from 'connected-react-router';
+import {addContacts} from './action';
+import defaultContacts from '../utils/contacts.json';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import Header from '../Header';
+import AddContact from './AddContact';
+import ContactListItem from './ContactListItem';
 
 class Contacts extends Component {
 
+  componentDidMount() {
+    const {contactList, actions} = this.props;
+    if (contactList.length === 0) {
+      this.props.actions.addContacts(defaultContacts);
+    }
+  }
+
   render() {
-    console.log('contacts' )
+    const {contactList} = this.props;
+
     return (
-      <h1>Contacts</h1>
+      <div>
+        <Header />
+        <div style={{margin: 20}}>
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Name</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Phone</TableCell>
+                  <TableCell>Address</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {
+                  contactList.map((contact, i) => {
+                    return (
+                      <ContactListItem key={contact.id} contact={contact} />
+                    );
+                  })
+                }
+              </TableBody>
+            </Table>
+          </Paper>
+        </div>
+        <AddContact />
+      </div>
     );
   }
 }
 
-export default Contacts;
+function mapStateToProps(state, ownProps) {
+  const {contactList} = state.contact;
+  return {
+    ...ownProps,
+    contactList
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({push, addContacts}, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
