@@ -204,7 +204,7 @@ class AddContact extends Component {
             horizontal: 'right',
           }}
           open={showSnackbar}
-          autoHideDuration={66666000}
+          autoHideDuration={6000}
           onClose={e => this.setState({showSnackbar: false})}
           message={
             <div style={{display:'flex', alignItems: 'center'}}>
