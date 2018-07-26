@@ -1,0 +1,62 @@
+[
+  {
+    "name": {
+      "first": "Justin",
+      "last": "Woodcock"
+    },
+    "email": "me@justinwoodcock.com",
+    "phone": "541-610-2504",
+    "location": {
+      "street": "2507 Reed Rd",
+      "city": "Escondido",
+      "state": "CA",
+      "zip": "92027",
+      "coordinates": {
+        "latitude": "33.132063",
+        "longitude": "-117.036216"
+      }
+    },
+    "picture": "https://media.licdn.com/dms/image/C4D03AQFlnkxlGya7bA/profile-displayphoto-shrink_100_100/0?e=1538006400&v=beta&t=dFBJoHK7grk4LZb1zZsEKJwClkzScyaVfKK5zHRp25U",
+    "id": "1532622104610"
+  },
+  {
+    "name": {
+      "first": "Serenity",
+      "last": "Webb"
+    },
+    "email": "serenity.webb@example.com",
+    "phone": "(290)-687-0811",
+    "location": {
+      "street": "3264 Woodland St",
+      "city": "El Paso",
+      "state": "Arkansas",
+      "zip": 98898,
+      "coordinates": {
+        "latitude": "-46.9411",
+        "longitude": "159.8401"
+      }
+    },
+    "picture": "https://randomuser.me/api/portraits/thumb/women/96.jpg",
+    "id": "1532622145998"
+  },
+  {
+    "name": {
+      "first": "Luke",
+      "last": "Pierce"
+    },
+    "email": "luke.pierce@example.com",
+    "phone": "(486)-929-6578",
+    "location": {
+      "street": "2371 Adams St",
+      "city": "Inglewood",
+      "state": "Arkansas",
+      "zip": 89607,
+      "coordinates": {
+        "latitude": "-89.6429",
+        "longitude": "-13.4225"
+      }
+    },
+    "picture": "https://randomuser.me/api/portraits/thumb/men/66.jpg",
+    "id": "1532622148421"
+  }
+]
