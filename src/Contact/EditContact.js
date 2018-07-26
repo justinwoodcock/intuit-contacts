@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {storeContact, setContactToEdit, updateContact} from './action';
-import {isEmpty, isNil} from 'ramda';
+import {isNil} from 'ramda';
 
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -66,7 +65,7 @@ class EditContact extends Component {
 
   ghettoValidation = () => {
     // basic validation testing to verify that all the inputs have a value (except the picture).
-    const {firstName, lastName, email, street, city, state, zip, phone, picture} = this.state;
+    const {firstName, lastName, email, street, city, state, zip, phone} = this.state;
     const contact = {firstName, lastName, email, street, city, state, zip, phone};
     const isValid = Object.keys(contact).every(key => isNil(contact[key]) === true || contact[key].length > 0);
     return isValid;
@@ -109,7 +108,7 @@ class EditContact extends Component {
   }
 
   render() {
-    const {contactToEdit, contactList, contact} = this.props;
+    const {contact} = this.props;
     const {showSnackbar} = this.state;
     const openDialog = isNil(contact) === true ? false : true;
     return (

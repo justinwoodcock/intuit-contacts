@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import muiTheme from './Mui';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from './History';
-import configureStore, { getPersistor } from './Store';
+import configureStore from './Store';
 
 import Contacts from './Contact/Contacts';
 

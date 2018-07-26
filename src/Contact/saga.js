@@ -1,5 +1,4 @@
-import { take, put, fork, select, takeEvery } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { take, put, fork, select } from 'redux-saga/effects';
 import {remove, update} from 'ramda';
 
 import {getRandomContact, storeContact, removeContact, storeContacts,
@@ -17,7 +16,7 @@ const RANDOM_USER_API_URL = 'https://randomuser.me/api/?nat=us';
 
 function* handleGetRandomContact() {
   while (true) {
-    const action = yield take(getRandomContact);
+    yield take(getRandomContact);
     const data = yield fetch(RANDOM_USER_API_URL)
       .then(res => res.json())
       .then(data => data.results[0])

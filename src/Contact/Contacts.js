@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {push} from 'connected-react-router';
 import {storeContacts, removeContact, setContactToEdit} from './action';
 import defaultContacts from '../utils/contacts.json';
 
@@ -22,7 +21,7 @@ class Contacts extends Component {
   componentDidMount() {
     const {contactList, actions} = this.props;
     if (contactList.length === 0) {
-      this.props.actions.storeContacts(defaultContacts);
+      actions.storeContacts(defaultContacts);
     }
   }
 
@@ -79,7 +78,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({push, storeContacts, removeContact,
+    actions: bindActionCreators({storeContacts, removeContact,
       setContactToEdit}, dispatch)
   };
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {storeContact} from './action';
-import {isEmpty, isNil} from 'ramda';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -65,7 +64,7 @@ class AddContact extends Component {
 
   ghettoValidation = () => {
     // basic validation testing to verify that all the inputs have a value (except the picture).
-    const {firstName, lastName, email, street, city, state, zip, phone, picture} = this.state;
+    const {firstName, lastName, email, street, city, state, zip, phone} = this.state;
     const contact = {firstName, lastName, email, street, city, state, zip, phone};
     const isValid = Object.keys(contact).every(key => contact[key] && contact[key].length > 0);
     return isValid;

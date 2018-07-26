@@ -23,7 +23,7 @@ class Header extends Component {
       <AppBar position="sticky">
           <Toolbar>
             <div>
-              <img src={`${process.env.PUBLIC_URL}/intuit-logo.png`} height={26} />
+              <img src={`${process.env.PUBLIC_URL}/intuit-logo.png`} alt="intuit logo" height={26} />
             </div>
             <ButtonWrapper>
               <Button style={{color:'#fff'}} onClick={this.props.actions.getRandomContact}>
