@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {getRandomContact} from './Contact/action';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+
+import styled from 'styled-components';
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+`;
 
 class Header extends Component {
 
@@ -15,6 +25,11 @@ class Header extends Component {
             <div>
               <img src={`${process.env.PUBLIC_URL}/intuit-logo.png`} height={26} />
             </div>
+            <ButtonWrapper>
+              <Button style={{color:'#fff'}} onClick={this.props.actions.getRandomContact}>
+                Add random
+              </Button>
+            </ButtonWrapper>
           </Toolbar>
         </AppBar>
     );
@@ -29,7 +44,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators({getRandomContact}, dispatch)
   };
 }
 
