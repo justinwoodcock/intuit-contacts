@@ -31,12 +31,12 @@ class ContactListItem extends Component {
         <TableCell>{contact.phone}</TableCell>
         <TableCell>{`${street} ${city} ${state} ${zip}`}</TableCell>
         <TableCell>
-        <IconButton onClick={e => removeContact(contactIndex)}>
-          <DeleteIcon />
-        </IconButton>
-        <IconButton onClick={e => setContactToEdit(contactIndex)}>
-          <EditIcon />
-        </IconButton>
+          <IconButton onClick={e => setContactToEdit(contactIndex)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={e => removeContact(contactIndex)}>
+            <DeleteIcon />
+          </IconButton>
         </TableCell>
       </TableRow>
     );

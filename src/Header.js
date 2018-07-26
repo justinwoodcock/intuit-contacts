@@ -6,6 +6,7 @@ import {getRandomContact} from './Contact/action';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import styled from 'styled-components';
 
@@ -28,6 +29,7 @@ class Header extends Component {
             <ButtonWrapper>
               <Button style={{color:'#fff'}} onClick={this.props.actions.getRandomContact}>
                 Add random
+                <PersonAddIcon style={{marginLeft: 10}} />
               </Button>
             </ButtonWrapper>
           </Toolbar>

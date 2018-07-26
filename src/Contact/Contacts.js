@@ -34,11 +34,11 @@ class Contacts extends Component {
       <div>
         <Header />
         <div style={{margin: 20}}>
-          <Paper>
+          <Paper style={{overflowX: 'scroll'}}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell />
+                  <TableCell>Avatar</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Phone</TableCell>
