@@ -28,7 +28,8 @@ function* handleGetRandomContact() {
       email: data.email,
       phone: data.phone,
       location: {
-        ...data.location
+        ...data.location,
+        zip: data.location.postcode
       },
       picture: data.picture.thumbnail,
       id: new Date().getTime()
