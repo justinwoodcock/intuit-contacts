@@ -26,9 +26,7 @@ class Contacts extends Component {
     }
   }
 
-  editContact = (index) => {
-    this.props.actions.setContactToEdit(index);
-  }
+  editContact = (index) => this.props.actions.setContactToEdit(index);
 
   render() {
     const {contactList} = this.props;
@@ -51,16 +49,14 @@ class Contacts extends Component {
               </TableHead>
               <TableBody>
                 {
-                  contactList.map((contact, i) => {
-                    return (
-                      <ContactListItem
-                        key={contact.id}
-                        contact={contact}
-                        removeContact={this.props.actions.removeContact}
-                        setContactToEdit={this.editContact}
-                        contactIndex={i} />
-                    );
-                  })
+                  contactList.map((contact, i) => (
+                    <ContactListItem
+                      key={contact.id}
+                      contact={contact}
+                      removeContact={this.props.actions.removeContact}
+                      setContactToEdit={this.editContact}
+                      contactIndex={i} />
+                  ))
                 }
               </TableBody>
             </Table>

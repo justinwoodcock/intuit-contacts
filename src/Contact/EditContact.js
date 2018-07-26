@@ -111,136 +111,134 @@ class EditContact extends Component {
   render() {
     const {contactToEdit, contactList, contact} = this.props;
     const {showSnackbar} = this.state;
-    const openDialog = !contactToEdit ? false : true;
+    const openDialog = isNil(contact) === true ? false : true;
     return (
-        <div>
-          {
-            !contactToEdit ? null :
+      <div>
+        {
+          isNil(contact) === true ? null :
             <div>
-            <Dialog
-              open={openDialog}
-              onClose={e => this.props.actions.setContactToEdit(null)}>
-              <DialogTitle id="form-dialog-title">Add Contact</DialogTitle>
-              <DialogContent style={{width: 500}}>
-                <DialogContentText style={{marginBottom: 10}}>
-                  Enter contact details below.
-                </DialogContentText>
-                <InputContainer>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="firstName"
-                    label="First Name *"
-                    onChange={this.onChange}
-                    defaultValue={contact.name.first} />
-                  <TextField
-                    margin="dense"
-                    id="lastName"
-                    label="Last Name *"
-                    onChange={this.onChange}
-                    defaultValue={contact.name.last} />
-                </InputContainer>
-                <Section>
-                  <SectionLabel>Address</SectionLabel>
+              <Dialog
+                open={openDialog}
+                onClose={e => this.props.actions.setContactToEdit(null)}>
+                <DialogTitle id="form-dialog-title">Add Contact</DialogTitle>
+                <DialogContent style={{width: 500}}>
+                  <DialogContentText style={{marginBottom: 10}}>
+                    Enter contact details below.
+                  </DialogContentText>
                   <InputContainer>
                     <TextField
+                      autoFocus
                       margin="dense"
-                      id="street"
-                      label="Street *"
+                      id="firstName"
+                      label="First Name *"
                       onChange={this.onChange}
-                      defaultValue={contact.location.street} />
-                    </InputContainer>
+                      defaultValue={contact.name.first} />
+                    <TextField
+                      margin="dense"
+                      id="lastName"
+                      label="Last Name *"
+                      onChange={this.onChange}
+                      defaultValue={contact.name.last} />
+                  </InputContainer>
+                  <Section>
+                    <SectionLabel>Address</SectionLabel>
                     <InputContainer>
                       <TextField
                         margin="dense"
-                        id="city"
-                        label="City *"
+                        id="street"
+                        label="Street *"
                         onChange={this.onChange}
-                        defaultValue={contact.location.city} />
-                      <TextField
-                        margin="dense"
-                        id="state"
-                        label="State *"
-                        onChange={this.onChange}
-                        defaultValue={contact.location.state} />
-                      <TextField
-                        margin="dense"
-                        id="zip"
-                        label="Zip *"
-                        onChange={this.onChange}
-                        defaultValue={contact.location.zip} />
-                  </InputContainer>
-                </Section>
-                <Section>
-                  <TextField
-                    margin="dense"
-                    id="email"
-                    label="Email Address *"
-                    type="email"
-                    fullWidth
-                    onChange={this.onChange}
-                    defaultValue={contact.email} />
-                  <TextField
-                    margin="dense"
-                    id="phone"
-                    label="Phone number *"
-                    type="tel"
-                    fullWidth
-                    onChange={this.onChange}
-                    defaultValue={contact.phone} />
-                  <TextField
-                    margin="dense"
-                    id="picture"
-                    label="Picture"
-                    placeholder="Add a web URL to a picture"
-                    type="url"
-                    fullWidth
-                    onChange={this.onChange}
-                    defaultValue={contact.picture} />
-                </Section>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.cancelAddContact} color="primary">
-                  Cancel
-                </Button>
-                <Button onClick={this.updateContact} color="primary">
-                  Save
-                </Button>
-              </DialogActions>
-            </Dialog>
-            <Snackbar
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={showSnackbar}
-              autoHideDuration={66666000}
-              onClose={e => this.setState({showSnackbar: false})}
-              message={
-                <div style={{display:'flex', alignItems: 'center'}}>
-                  <ErrorIcon style={{marginRight:10}} />
-                  <div>Make sure every field marked with an asterisk (*) has a value.</div>
-                </div>
-              }
-              action={[
-                <IconButton
-                  key="close"
-                  color="inherit"
-                  onClick={e => this.setState({showSnackbar: false})}>
-                  <CloseIcon />
-                </IconButton>
-              ]}
-            />
+                        defaultValue={contact.location.street} />
+                      </InputContainer>
+                      <InputContainer>
+                        <TextField
+                          margin="dense"
+                          id="city"
+                          label="City *"
+                          onChange={this.onChange}
+                          defaultValue={contact.location.city} />
+                        <TextField
+                          margin="dense"
+                          id="state"
+                          label="State *"
+                          onChange={this.onChange}
+                          defaultValue={contact.location.state} />
+                        <TextField
+                          margin="dense"
+                          id="zip"
+                          label="Zip *"
+                          onChange={this.onChange}
+                          defaultValue={contact.location.zip} />
+                    </InputContainer>
+                  </Section>
+                  <Section>
+                    <TextField
+                      margin="dense"
+                      id="email"
+                      label="Email Address *"
+                      type="email"
+                      fullWidth
+                      onChange={this.onChange}
+                      defaultValue={contact.email} />
+                    <TextField
+                      margin="dense"
+                      id="phone"
+                      label="Phone number *"
+                      type="tel"
+                      fullWidth
+                      onChange={this.onChange}
+                      defaultValue={contact.phone} />
+                    <TextField
+                      margin="dense"
+                      id="picture"
+                      label="Picture"
+                      placeholder="Add a web URL to a picture"
+                      type="url"
+                      fullWidth
+                      onChange={this.onChange}
+                      defaultValue={contact.picture} />
+                  </Section>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.cancelAddContact} color="primary">
+                    Cancel
+                  </Button>
+                  <Button onClick={this.updateContact} color="primary">
+                    Save
+                  </Button>
+                </DialogActions>
+              </Dialog>
+              <Snackbar
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={showSnackbar}
+                autoHideDuration={66666000}
+                onClose={e => this.setState({showSnackbar: false})}
+                message={
+                  <div style={{display:'flex', alignItems: 'center'}}>
+                    <ErrorIcon style={{marginRight:10}} />
+                    <div>Make sure every field marked with an asterisk (*) has a value.</div>
+                  </div>
+                }
+                action={[
+                  <IconButton
+                    key="close"
+                    color="inherit"
+                    onClick={e => this.setState({showSnackbar: false})}>
+                    <CloseIcon />
+                  </IconButton> ]} />
           </div>
-          }
-        </div>
+        }
+      </div>
     );
   }
 }
 
 function mapStateToProps(state, ownProps) {
   const {contactList, contactToEdit} = state.contact;
-  const contact = !contactToEdit ? null : contactList[contactToEdit];
+  const contact = isNil(contactToEdit) ? null : contactList[contactToEdit];
   return {
     ...ownProps,
     contactList,

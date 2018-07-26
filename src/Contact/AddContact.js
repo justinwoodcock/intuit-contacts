@@ -59,10 +59,6 @@ class AddContact extends Component {
     showSnackbar: false
   }
 
-  componentDidMount() {
-
-  }
-
   setOpenDialog = openDialog => this.setState({openDialog});
 
   onChange = e => this.setState({[e.target.id]: e.target.value});
